@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Age, BMI, Percentage, Love & Currency Calculator - Royal Multi Tools</title>
+    <meta name="description" content="Royal Multi Tools: Best online tool for Age calculation (বয়স ক্যালকুলেটর), Love Calculator, Currency Converter (টাকা রূপান্তর), and Percentage. Fast & Accurate.">
+    <meta name="keywords" content="Royal Multi Tools, Percentage Calculator, Age Calculator, বয়স ক্যালকুলেটর, Love Calculator, লাভ ক্যালকুলেটর, Currency Converter, টাকা কনভার্টার, BMI tool, Bangladesh calculator">
+    
+    <style>
+        @import url('https://fonts.googleapis.com');
+
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #020617; color: white; line-height: 1.6; }
+        .container { max-width: 850px; margin: auto; padding: 20px; }
+        h1 { color: #fbbf24; text-align: center; text-shadow: 0 0 15px rgba(251,191,36,0.5); font-size: 2.2rem; margin-bottom: 5px; }
+        .tagline { text-align: center; color: #94a3b8; margin-bottom: 30px; font-size: 0.9rem; }
+
+        .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 25px; }
+        .menu button { padding: 12px; border: none; border-radius: 12px; cursor: pointer; background: rgba(251, 191, 36, 0.05); border: 1px solid rgba(251, 191, 36, 0.2); font-weight: bold; color: #fbbf24; transition: 0.3s; }
+        .menu button.active-btn { background: linear-gradient(45deg, #fbbf24, #d97706); color: #020617; box-shadow: 0 8px 20px rgba(251,191,36,0.3); border: none; }
+
+        .card { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(251,191,36,0.1); padding: 30px 20px; border-radius: 28px; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.6); text-align: center; }
+        h2 { font-size: 1.3rem; color: #fbbf24; margin-bottom: 15px; }
+
+        input, select { padding: 14px; margin: 8px 5px; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; outline: none; text-align: center; width: 85%; max-width: 300px; font-size: 1rem; }
+        input:focus { border-color: #fbbf24; }
+
+        .age-group { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .age-group input { width: 80px; }
+
+        button.calcBtn { width: 100%; max-width: 300px; padding: 15px; margin-top: 15px; border: none; border-radius: 12px; background: linear-gradient(to right, #fbbf24, #d97706); color: #020617; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
+        .tool { display: none; }
+        .show { display: block; }
+
+        .result-box { margin-top: 25px; padding: 20px; border-radius: 18px; background: rgba(251, 191, 36, 0.08); border: 1px dashed #fbbf24; display: none; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .result-text { font-size: 1.5rem; color: #fbbf24; font-weight: bold; margin-bottom: 10px; }
+
+        .seo-text { margin-top: 40px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 20px; font-size: 0.9rem; }
+        footer { text-align: center; margin-top: 40px; color: #475569; font-size: 0.8rem; padding-bottom: 20px; }
+
+        @media(max-width:480px){ .menu { grid-template-columns: 1fr 1fr; } .age-group input { width: 100%; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Royal Multi Tools</h1>
+    <p class="tagline">All-in-One Fast Online Calculators</p>
+
+    <div class="menu">
+        <button onclick="switchTool('age', this)" class="active-btn">বয়স (Age)</button>
+        <button onclick="switchTool('love', this)">ভালোবাসা (Love)</button>
+        <button onclick="switchTool('currency', this)">টাকা (Currency)</button>
+        <button onclick="switchTool('percent', this)">পার্সেন্টেজ (%)</button>
+        <button onclick="switchTool('bmi', this)">বিএমআই (BMI)</button>
+    </div>
+
+    <div class="card">
+        <!-- AGE -->
+        <div id="age" class="tool show">
+            <h2>Age Calculator / বয়স ক্যালকুলেটর</h2>
+            <div class="age-group">
+                <input type="number" id="day" placeholder="দিন (DD)">
+                <input type="number" id="month" placeholder="মাস (MM)">
+                <input type="number" id="year" placeholder="বছর (YYYY)">
+            </div>
+            <button class="calcBtn" onclick="calculateAge()">বয়স বের করুন</button>
+        </div>
+
+        <!-- LOVE CALCULATOR -->
+        <div id="love" class="tool">
+            <h2>Love Calculator / ভালোবাসা পরীক্ষা</h2>
+            <input type="text" id="name1" placeholder="আপনার নাম">
+            <input type="text" id="name2" placeholder="পার্টনারের নাম">
+            <button class="calcBtn" onclick="calculateLove()">মিল পরীক্ষা করুন</button>
+        </div>
+
+        <!-- CURRENCY CONVERTER -->
+        <div id="currency" class="tool">
+            <h2>Currency Converter / মুদ্রা রূপান্তর</h2>
+            <input type="number" id="amount" placeholder="পরিমাণ লিখুন">
+            <select id="fromCurrency">
+                <option value="USD">USD (ডলার)</option>
+                <option value="BDT" selected>BDT (টাকা)</option>
+                <option value="INR">INR (রুপি)</option>
+            </select>
+            <select id="toCurrency">
+                <option value="BDT" selected>BDT (টাকা)</option>
+                <option value="USD">USD (ডলার)</option>
+                <option value="INR">INR (রুপি)</option>
+            </select>
+            <button class="calcBtn" onclick="convertCurrency()">রূপান্তর করুন</button>
+        </div>
+
+        <!-- PERCENTAGE -->
+        <div id="percent" class="tool">
+            <h2>Percentage Calculator / পার্সেন্টেজ</h2>
+            <input type="number" id="part" placeholder="কত অংশ">
+            <input type="number" id="total" placeholder="মোট মান">
+            <button class="calcBtn" onclick="calculatePercent()">ফলাফল দেখুন</button>
+        </div>
+
+        <!-- BMI -->
+        <div id="bmi" class="tool">
+            <h2>BMI Calculator / বিএমআই</h2>
+            <input type="number" id="weight" placeholder="ওজন (কেজি)">
+            <input type="number" id="height" placeholder="উচ্চতা (মিটার)">
+            <button class="calcBtn" onclick="calculateBMI()">BMI চেক করুন</button>
+        </div>
+
+        <!-- SHARED RESULT BOX -->
+        <div id="resultBox" class="result-box">
+            <div id="resultValue" class="result-text"></div>
+            <button style="background:none; border:1px solid #94a3b8; color:#94a3b8; padding:5px 10px; border-radius:8px; cursor:pointer;" onclick="copyResult()">Copy Result</button>
+        </div>
+    </div>
+
+    <!-- SEO Content -->
+    <article class="seo-text">
+        <h3>Royal Multi Tools - Online Tools in Bangladesh</h3>
+        <p>Royal Multi Tools offers the fastest <strong>Age Calculator</strong>, <strong>Love Calculator</strong> (ভালোবাসা পরীক্ষা), and <strong>Currency Converter</strong> (টাকা কনভার্টার) in Bangladesh. If you are looking for a reliable <strong>Percentage Calculator</strong> or <strong>BMI tool</strong>, our website is the number one choice. This tool works perfectly in both Bangla and English searches.</p>
+        <p>আমাদের সাইটে আপনি পাবেন সঠিক বয়স গণনা, মুদ্রা রূপান্তর এবং পার্সেন্টেজ বের করার সহজ উপায়। <strong>লাভ ক্যালকুলেটর</strong> দিয়ে আপনার ও আপনার প্রিয়জনের নামের মিল পরীক্ষা করুন মুহূর্তেই।</p>
+    </article>
+
+    <footer>&copy; 2026 Royal Multi Tools | Designed for Speed</footer>
+</div>
+
+<script>
+    function switchTool(id, btn) {
+        document.querySelectorAll('.tool').forEach(t => t.classList.remove('show'));
+        document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active-btn'));
+        document.getElementById(id).classList.add('show');
+        btn.classList.add('active-btn');
+        document.getElementById('resultBox').style.display = 'none';
+    }
+
+    function showResult(val) {
+        const box = document.getElementById('resultBox');
+        document.getElementById('resultValue').innerText = val;
+        box.style.display = 'block';
+    }
+
+    function calculateAge() {
+        let d = parseInt(document.getElementById('day').value);
+        let m = parseInt(document.getElementById('month').value);
+        let y = parseInt(document.getElementById('year').value);
+        if(!d || !m || !y) return alert("সঠিক জন্ম তারিখ লিখুন।");
+        let age = (new Date()).getFullYear() - y;
+        showResult("আপনার বয়স: " + age + " বছর");
+    }
+
+    function calculateLove() {
+        let n1 = document.getElementById('name1').value.trim();
+        let n2 = document.getElementById('name2').value.trim();
+        if(!n1 || !n2) return alert("দয়া করে দুটি নাম লিখুন।");
+        let score = Math.floor(Math.random() * 41) + 60; // Random score between 60-100
+        showResult("ভালোবাসার মিল: " + score + "% ❤️");
+    }
+
+    function convertCurrency() {
+        let amt = document.getElementById('amount').value;
+        let from = document.getElementById('fromCurrency').value;
+        let to = document.getElementById('toCurrency').value;
+        if(!amt) return alert("পরিমাণ লিখুন।");
+        
+        // Manual Rates (Example)
+        let rates = { "USD_BDT": 115, "BDT_USD": 0.0087, "INR_BDT": 1.38, "BDT_INR": 0.72, "USD_INR": 83, "INR_USD": 0.012 };
+        let key = from + "_" + to;
+        let res = from === to ? amt : (amt * (rates[key] || 1)).toFixed(2);
+        showResult("ফলাফল: " + res + " " + to);
+    }
+
+    function calculatePercent() {
+        let p = document.getElementById('part').value;
+        let t = document.getElementById('total').value;
+        if(!p || !t) return alert("মান লিখুন।");
+        showResult("পার্সেন্টেজ: " + ((p/t)*100).toFixed(2) + "%");
+    }
+
+    function calculateBMI() {
+        let w = document.getElementById('weight').value;
+        let h = document.getElementById('height').value;
+        if(!w || !h) return alert("ওজন ও উচ্চতা দিন।");
+        showResult("আপনার BMI: " + (w/(h*h)).toFixed(2));
+    }
+
+    function copyResult() {
+        navigator.clipboard.writeText(document.getElementById('resultValue').innerText);
+        alert("কপি হয়েছে!");
+    }
+</script>
+
+</body>
+</html>
